@@ -8,30 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="estilos.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-
-        .login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .login-container h2 {
-            margin-bottom: 30px;
-            color: #333;
-            text-align: center;
-        }
-    </style>
 </head>
 
 <body>
-    <!-- HEADER -->
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center me-auto">
@@ -66,7 +45,7 @@
                     <input type="checkbox" class="form-check-input" id="rememberMe">
                     <label class="form-check-label" for="rememberMe">Recordarme</label>
                 </div>
-                <button type="submit" class="btn btn-success btn-block">Ingresar</button>
+                <button type="button" class="btn btn-success btn-block" onclick="window.location.href='home.html'">Ingresar</button>
                 <hr>
                 <p class="text-center">¿No tienes una cuenta? <a href="registro.html">Regístrate aquí</a></p>
                 <p class="text-center"><a href="#">¿Olvidaste tu contraseña?</a></p>
