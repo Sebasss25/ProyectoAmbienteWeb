@@ -14,6 +14,6 @@ function animateCount(element, target) {
 document.addEventListener("DOMContentLoaded", function () {
     animateCount(document.getElementById('mascotasCount'), 124);
     animateCount(document.getElementById('adopcionesCount'), 89);
-    animateCount(document.getElementById('campaniasCount'), 15);
-    animateCount(document.getElementById('voluntariosCount'), 42);
+    animateCount(document.getElementById('campaniasCount'), 1);
+    animateCount(document.getElementById('voluntariosCount'), 1);
 });
