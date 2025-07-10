@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Eventos</title>
+    <title>Reportes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="estilos.css">
@@ -32,14 +32,9 @@
     <!-- Contenido principal -->
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="display-4">Lista de Eventos</h1>
+            <h1 class="display-4">Lista de Reportes</h1>
             <form action="#" class="d-flex" role="search">
-                <select class="form-select me-2" name="type">
-                    <option value="Sin Filtro">Sin Filtro</option>
-                    <option value="Presencial">Presencial</option>
-                    <option value="Virtual">Virtual</option>
-                </select>
-                <input class="form-control me-2" type="search" name="search" placeholder="Buscar por nombre o descripción">
+                <input class="form-control me-2" type="search" name="search" placeholder="Buscar">
                 <button class="btn btn-secondary ml-2" type="submit">
                     <i class="fas fa-search"></i> Buscar
                 </button>
@@ -47,13 +42,6 @@
             <a href="#" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Nuevo Evento
             </a>
-        </div>
-
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Evento creado correctamente.
-            <button type="button" class="close" data-dismiss="alert">
-                <span>&times;</span>
-            </button>
         </div>
 
         <div class="table-responsive">
