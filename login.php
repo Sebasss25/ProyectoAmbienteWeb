@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/app/controllers/AuthController.php';
-require_once __DIR__ . '/app/config/auth.php'; // asegura la función
+require_once __DIR__ . '/app/config/auth.php'; 
 start_session_safe();
 
 $auth = new AuthController();

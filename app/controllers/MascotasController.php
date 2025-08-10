@@ -73,7 +73,7 @@ class MascotasController {
     header('Location: mascotas.php');
     exit();
     }
-    
+
     public function detalles(int $id) {
     require_once __DIR__ . '/../models/Mascota.php';
     $model = new Mascota();
@@ -84,7 +84,7 @@ class MascotasController {
         header('Location: mascotas.php'); exit();
     }
 
-    $m = $mascota; // alias para la vista
+    $m = $mascota; 
     require __DIR__ . '/../views/mascotas/detalles.php';
     }
 
