@@ -6,7 +6,6 @@ if (empty($_SESSION['user_id'])) { header('Location: login.php'); exit; }
 
 $db = Database::connect();
 
-/** Helper: obtiene un COUNT(*) seguro */
 function db_count(mysqli $db, string $sql): int {
   $res = $db->query($sql);
   if (!$res) return 0;
@@ -14,7 +13,6 @@ function db_count(mysqli $db, string $sql): int {
   return isset($row['c']) ? (int)$row['c'] : 0;
 }
 
-/* Métricas reales */
 $totMascotas       = db_count($db, "SELECT COUNT(*) c FROM Mascotas");
 $totDisponibles    = db_count($db, "SELECT COUNT(*) c FROM Mascotas WHERE estado = 'Disponible'");
 $totAdoptadas      = db_count($db, "SELECT COUNT(*) c FROM Mascotas WHERE estado = 'Adoptado'");
@@ -22,7 +20,6 @@ $totAdopciones     = db_count($db, "SELECT COUNT(*) c FROM Adopciones");
 $totCampanias      = db_count($db, "SELECT COUNT(*) c FROM Campanias");
 $totReportes       = db_count($db, "SELECT COUNT(*) c FROM Reportes");
 
-/* Listas recientes */
 $mascotasRec = $db->query("SELECT id,nombre,raza,estado FROM Mascotas ORDER BY id DESC LIMIT 5");
 $adopRec     = $db->query("SELECT A.id, A.fecha, U.nombre AS usuario, M.nombre AS mascota
                            FROM Adopciones A 
