@@ -11,9 +11,10 @@ function animateCount(element, target) {
     }, 20);
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    animateCount(document.getElementById('mascotasCount'), 124);
-    animateCount(document.getElementById('adopcionesCount'), 89);
-    animateCount(document.getElementById('campaniasCount'), 1);
-    animateCount(document.getElementById('voluntariosCount'), 1);
+document.addEventListener('DOMContentLoaded', function () {
+  const setText = (id, value) => { const el = document.getElementById(id); if (el) el.textContent = value; };
+  setText('mascotasCount', '0');
+  setText('adopcionesCount', '0');
+  setText('campaniasCount', '0');
+  setText('voluntariosCount', '0');
 });
