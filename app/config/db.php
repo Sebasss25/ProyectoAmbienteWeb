@@ -2,10 +2,10 @@
 class Database {
     public static function connect(): mysqli {
         $host = '127.0.0.1';
-        $user = 'patitas';       
-        $pass = 'patitas123';    
+        $user = 'root';       // <--
+        $pass = '';    // <--
         $db   = 'DejandoHuellaDB';
-        $port = 3307;        
+        $port = 3306;            // según tu Workbench
 
         $mysqli = new mysqli($host, $user, $pass, $db, $port);
         if ($mysqli->connect_errno) {
