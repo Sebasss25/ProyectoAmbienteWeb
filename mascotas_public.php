@@ -11,6 +11,18 @@ include 'app/views/partials/header.php';
 <div class="container py-5">
   <h2 class="mb-4 text-center">Mascotas disponibles</h2>
 
+  <?php if (!empty($_SESSION['mascotas_success'])): ?>
+    <div class="alert alert-success">
+      <?= $_SESSION['mascotas_success']; unset($_SESSION['mascotas_success']); ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($_SESSION['mascotas_error'])): ?>
+    <div class="alert alert-danger">
+      <?= $_SESSION['mascotas_error']; unset($_SESSION['mascotas_error']); ?>
+    </div>
+  <?php endif; ?>
+
   <?php if (!$disponibles): ?>
     <div class="alert alert-info">No hay mascotas disponibles por ahora.</div>
   <?php else: ?>
