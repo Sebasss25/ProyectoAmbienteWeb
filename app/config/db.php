@@ -4,6 +4,7 @@ class Database {
         $host = '127.0.0.1';
         $user = 'root';       // <--
         $pass = '';    // <--
+
         $db   = 'dejandohuelladb';
         $port = 3306;            // según tu Workbench
 
