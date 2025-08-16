@@ -7,6 +7,7 @@ class AuthController {
   public function login() {
     start_session_safe();
 
+    // Si ya está logueado y llega por GET, llévalo a su dashboard
     if ($_SERVER['REQUEST_METHOD'] !== 'POST' && isset($_SESSION['user_id'])) {
       redirect_home_by_role();
     }
@@ -24,9 +25,11 @@ class AuthController {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['nombre']  = $user['nombre'];
         $_SESSION['email']   = $user['email'];
+        // Normaliza rol a string simple
         $_SESSION['rol']     = ($user['rol_nombre'] === 'Administrador') ? 'admin'
                                : (($user['rol_nombre'] === 'Voluntario') ? 'voluntario' : 'usuario');
 
+        // 🚦 al dashboard correspondiente
         redirect_home_by_role();
       }
 
@@ -35,6 +38,7 @@ class AuthController {
       exit();
     }
 
+    // GET sin POST: (si usas login.php como vista, esto ni se ejecuta)
     require 'app/views/partials/header.php';
     echo '<div class="container mt-4"><div class="alert alert-info">Envia el formulario de login.</div></div>';
     require 'app/views/partials/footer.php';
@@ -89,6 +93,7 @@ class AuthController {
       return;
     }
 
+    // Autologin como usuario normal
     $user = $userModel->findByEmail($email);
     session_regenerate_id(true);
     $_SESSION['user_id'] = $user['id'];
@@ -99,6 +104,7 @@ class AuthController {
     unset($_SESSION['old']);
     $_SESSION['success'] = 'Cuenta creada con éxito. ¡Bienvenido!';
 
+    // 🚦 al dashboard de usuario
     redirect_home_by_role();
   }
 
