@@ -13,7 +13,7 @@ class AdopcionesController {
 
     if (!$mascota || $mascota['estado'] !== 'Disponible') {
       $_SESSION['mascotas_error'] = 'La mascota no está disponible para adopción.';
-      header('Location: mascotas.php');
+      header('Location: mascotas_public.php', true, 303);
       exit();
     }
 
@@ -28,11 +28,11 @@ class AdopcionesController {
       ]);
 
       if ($ok) {
-        $_SESSION['mascotas_success'] = 'Solicitud recibida. Te enviaremos los detalles por correo.';
-        header('Location: mascotas.php');
+        $_SESSION['mascotas_success'] = 'Solicitud recibida. Hemos iniciado el proceso de comunicación. Te contactaremos por correo.';
+        header('Location: mascotas_public.php', true, 303);
       } else {
         $_SESSION['adopciones_error'] = 'No se pudo registrar la solicitud: ' . $aModel->getError();
-        header('Location: adopciones.php?action=create&mascota_id=' . $mascotaId);
+        header('Location: adopciones.php?action=create&mascota_id=' . $mascotaId, true, 303);
       }
       exit();
     }

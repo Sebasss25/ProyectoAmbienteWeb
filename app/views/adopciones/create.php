@@ -8,6 +8,9 @@
   <div class="card shadow">
     <div class="card-body">
       <p class="mb-3">Estás solicitando adoptar a <strong><?= htmlspecialchars($mascota_nombre) ?></strong>. Completa el formulario y <strong>te enviaremos los detalles por correo</strong> para continuar.</p>
+      <?php if (!empty($_SESSION['adopciones_error'])): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($_SESSION['adopciones_error']); unset($_SESSION['adopciones_error']); ?></div>
+      <?php endif; ?>
       <form method="POST">
         <div class="form-group">
           <label>¿Por qué deseas adoptar?</label>

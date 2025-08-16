@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/app/config/auth.php';
 require_once __DIR__ . '/app/models/Mascota.php';
+
 start_session_safe();
 
 $mModel = new Mascota();
@@ -11,6 +12,24 @@ include 'app/views/partials/header.php';
 <div class="container py-5">
   <h2 class="mb-4 text-center">Mascotas disponibles</h2>
 
+  <?php if (!empty($_SESSION['mascotas_success'])): ?>
+    <div class="alert alert-success">
+      <?= htmlspecialchars($_SESSION['mascotas_success']); unset($_SESSION['mascotas_success']); ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($_SESSION['mascotas_error'])): ?>
+    <div class="alert alert-danger">
+      <?= htmlspecialchars($_SESSION['mascotas_error']); unset($_SESSION['mascotas_error']); ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if (!empty($_SESSION['adopciones_error'])): ?>
+    <div class="alert alert-danger">
+      <?= htmlspecialchars($_SESSION['adopciones_error']); unset($_SESSION['adopciones_error']); ?>
+    </div>
+  <?php endif; ?>
+
   <?php if (!$disponibles): ?>
     <div class="alert alert-info">No hay mascotas disponibles por ahora.</div>
   <?php else: ?>
@@ -18,14 +37,16 @@ include 'app/views/partials/header.php';
       <?php foreach ($disponibles as $m): ?>
         <div class="col-md-4 col-sm-12">
           <div class="card mb-3 h-100">
-            <img src="<?= htmlspecialchars($m['foto'] ?: 'img/placeholder.jpg') ?>"
-                 class="card-img-top imagen-mascota"
-                 alt="Foto de <?= htmlspecialchars($m['nombre']) ?>"
-                 loading="lazy"
-                 onerror="this.onerror=null;this.src='img/placeholder.jpg';">
+            <img
+              src="<?= htmlspecialchars($m['foto'] ?: 'img/placeholder.jpg') ?>"
+              class="card-img-top imagen-mascota"
+              alt="Foto de <?= htmlspecialchars($m['nombre']) ?>"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='img/placeholder.jpg';"
+            >
             <div class="card-body">
               <h5 class="card-title"><?= htmlspecialchars($m['nombre']) ?></h5>
-              <p class="card-text">
+              <p class="card-text mb-2">
                 Raza: <?= htmlspecialchars($m['raza']) ?><br>
                 Edad: <?= (int)$m['edad'] ?> años
               </p>
@@ -59,6 +80,11 @@ include 'app/views/partials/header.php';
 </div>
 
 <style>
-.imagen-mascota{width:100%;height:220px;object-fit:cover;background:#f3f5f7}
+  .imagen-mascota{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    background:#f3f5f7
+  }
 </style>
 <?php include 'app/views/partials/footer.php'; ?>

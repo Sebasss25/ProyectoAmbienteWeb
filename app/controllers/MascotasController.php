@@ -49,18 +49,28 @@ class MascotasController {
         'descripcion' => $_POST['descripcion'] ?? '',
         'foto' => $_POST['foto'] ?? null,
         'estado' => $_POST['estado'] ?? 'Disponible',
-        'usuario' => (int)($mascota['usuario'])
+        'usuario' => (int)($mascota['usuario']) // mantener propietario original
       ];
-      if ($m->update($id, $data)) {
-        $_SESSION['success'] = 'Mascota actualizada';
+
+      $estadoAnterior = $mascota['estado'];
+      $ok = $m->updateConResetAdopciones($id, $data);
+
+      if ($ok) {
+        $msg = 'Mascota actualizada.';
+        if ($data['estado'] === 'Disponible' && in_array($estadoAnterior, ['Adoptado','En comunicación'], true)) {
+          $msg .= ' Se eliminaron las solicitudes de adopción vinculadas.';
+        }
+        $_SESSION['success'] = $msg;
       } else {
         $_SESSION['error'] = 'Error: ' . $m->getError();
       }
       header('Location: mascotas.php');
       exit();
     }
+
     require 'app/views/mascotas/edit.php';
   }
+
 
   public function delete(int $id) {
     require_role(['admin']);
@@ -72,21 +82,19 @@ class MascotasController {
     }
     header('Location: mascotas.php');
     exit();
-    }
-    
-    public function detalles(int $id) {
+  }
+
+  public function detalles(int $id) {
     require_once __DIR__ . '/../models/Mascota.php';
     $model = new Mascota();
     $mascota = method_exists($model,'findById') ? $model->findById($id) : $model->find($id);
 
     if (!$mascota) {
-        $_SESSION['mascotas_error'] = 'Mascota no encontrada.';
-        header('Location: mascotas.php'); exit();
+      $_SESSION['mascotas_error'] = 'Mascota no encontrada.';
+      header('Location: mascotas.php'); exit();
     }
 
     $m = $mascota; // alias para la vista
     require __DIR__ . '/../views/mascotas/detalles.php';
-    }
-
-
+  }
 }

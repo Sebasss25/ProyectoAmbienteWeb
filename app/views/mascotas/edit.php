@@ -27,6 +27,8 @@
             <select name="estado" class="form-control" required>
               <option value="Disponible" <?= $mascota['estado']==='Disponible'?'selected':'' ?>>Disponible</option>
               <option value="Adoptado" <?= $mascota['estado']==='Adoptado'?'selected':'' ?>>Adoptado</option>
+              <option value="En comunicación" <?= $mascota['estado']==='En comunicación'?'selected':'' ?>>En comunicación</option>
+              <option value="En tratamiento" <?= $mascota['estado']==='En tratamiento'?'selected':'' ?>>En tratamiento</option>
             </select>
           </div>
           <div class="form-group col-md-4">

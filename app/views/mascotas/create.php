@@ -27,6 +27,8 @@
             <select name="estado" class="form-control" required>
               <option value="Disponible">Disponible</option>
               <option value="Adoptado">Adoptado</option>
+              <option value="En comunicación">Adoptado</option>
+              <option value="En tratamiento">Adoptado</option>
             </select>
           </div>
           <div class="form-group col-md-4">

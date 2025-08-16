@@ -24,9 +24,13 @@
           <tr>
             <th class="text-muted">Estado:</th>
             <td>
-              <span class="badge <?= ($m['estado']==='Disponible'?'badge-success':'badge-secondary') ?>">
-                <?= htmlspecialchars($m['estado']) ?>
-              </span>
+              <?php
+                $badge = 'badge-secondary';
+                if ($m['estado']==='Disponible') $badge='badge-success';
+                elseif ($m['estado']==='En comunicación') $badge='badge-info';
+                elseif ($m['estado']==='En tratamiento') $badge='badge-warning';
+              ?>
+              <span class="badge <?= $badge ?>"><?= htmlspecialchars($m['estado']) ?></span>
             </td>
           </tr>
           <tr>
