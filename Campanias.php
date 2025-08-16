@@ -21,6 +21,9 @@ switch ($action) {
     case 'donar':
         $controller->donar($id);
         break;
+    case 'verDonaciones':
+        $controller->verDonaciones();
+        break;
     default:
         $controller->index();
 }

@@ -32,7 +32,7 @@ include 'app/views/partials/header.php';
       <?php foreach ($eventos as $evento): ?>
         <div class="col-md-4 col-sm-6 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="<?= htmlspecialchars($evento['imagen'] ?? 'img/eventos/default.jpg') ?>" class="card-img-top"
+            <img src="<?= htmlspecialchars($evento['imagen'] ?? 'https://www.ulacit.ac.cr/wp-content/uploads/Evento-Noticia1.jpg') ?>" class="card-img-top"
               alt="<?= htmlspecialchars($evento['nombre']) ?>" style="height: 200px; object-fit: cover;">
             <div class="card-body">
               <h5 class="card-title"><?= htmlspecialchars($evento['nombre']) ?></h5>

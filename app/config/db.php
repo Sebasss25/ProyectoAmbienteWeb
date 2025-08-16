@@ -3,8 +3,8 @@ class Database {
     public static function connect(): mysqli {
         $host = '127.0.0.1';
         $user = 'root';       // <--
-        $pass = '';    // <--
-        $db   = 'DejandoHuellaDB';
+        $pass = 'Ramchino8002';    // <--
+        $db   = 'dejandohuelladb';
         $port = 3306;            // según tu Workbench
 
         $mysqli = new mysqli($host, $user, $pass, $db, $port);

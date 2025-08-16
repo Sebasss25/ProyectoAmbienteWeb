@@ -27,7 +27,7 @@ include 'app/views/partials/header.php';
       <?php foreach ($campanias as $campania): ?>
         <div class="col-md-4 col-sm-6 mb-4">
           <div class="card h-100 shadow-sm">
-            <img src="<?= htmlspecialchars($campania['imagen'] ?? 'img/campanias/default.jpg') ?>" 
+            <img src="<?= htmlspecialchars($campania['imagen'] ?? 'https://static3.teletica.com/Files/Sizes/2023/10/12/campaa-huellitas-chira.-fotografas-adriana-araya_1597241119_380x260.jpg') ?>" 
                  class="card-img-top img-fluid" 
                  alt="<?= htmlspecialchars($campania['nombre']) ?>"
                  style="height: 200px; object-fit: cover;">

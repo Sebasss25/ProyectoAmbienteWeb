@@ -152,6 +152,8 @@ class CampaniasController
       exit();
     }
 
+    
+
     $campania = (new Campania())->find($campania_id);
     if (!$campania || $campania['estado'] !== 'Activa') {
       $_SESSION['campanias_error'] = 'No se puede donar a esta campaña';
@@ -161,5 +163,12 @@ class CampaniasController
 
     require 'app/views/campanias/donar.php';
   }
+
+  public function verDonaciones() {
+        $donacionModel = new CampaniaDonacion();
+        $donaciones = $donacionModel->obtenerTodasLasDonaciones();
+        $totalRecaudadoGeneral = $donacionModel->obtenerTotalDonadoGeneral();
+        include 'app/views/campanias/DonacionCampania.php'; 
+    }
 
 }
