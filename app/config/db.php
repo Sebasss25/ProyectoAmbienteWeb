@@ -1,14 +1,14 @@
 <?php
 class Database {
     public static function connect(): mysqli {
-        $host = '127.0.0.1';
-        $user = 'patitas';       // <--
-        $pass = 'patitas123';    // <--
+        $host = 'localhost';
+        $user = 'root';       // <--
+        $pass = '1234';    // <--
 
-        $db   = 'DejandoHuellaDB';
-        $port = 3307;            // según el Workbench
+        $db   = 'dejandohuelladb';
+        //$port = 3307;            // según el Workbench
 
-        $mysqli = new mysqli($host, $user, $pass, $db, $port);
+        $mysqli = new mysqli($host, $user, $pass, $db);
         if ($mysqli->connect_errno) {
             die('Error de conexión: ' . $mysqli->connect_error);
         }
