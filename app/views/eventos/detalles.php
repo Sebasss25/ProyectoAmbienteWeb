@@ -83,7 +83,7 @@
           <?php endif; ?>
         <?php endif; ?>
 
-        <a href="eventos.php" class="btn btn-secondary ml-2">Volver</a>
+        <a href="eventos_public.php" class="btn btn-secondary ml-2">Volver</a>
       <?php endif; ?>
     </div>
   </div>
