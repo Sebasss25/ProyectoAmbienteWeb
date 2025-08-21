@@ -34,7 +34,7 @@
                 <th>Peso (kg)</th>
                 <th>Temp (°C)</th>
                 <th>Próximo control</th>
-                <th>Estado</th> <!-- NUEVO -->
+                <th>Estado</th> 
                 <th>Adjunto</th>
                 <?php if (!empty($puedeEditar)): ?><th>Acciones</th><?php endif; ?>
               </tr>

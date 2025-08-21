@@ -6,7 +6,7 @@ class ReporteController
 {
     public function index()
     {
-        require_login();
+        require_role(['admin']);
         $rep = new Reporte();
         $reportes = $rep->all();
         require 'app/views/Reportes/index.php';
@@ -14,22 +14,33 @@ class ReporteController
 
     public function create()
     {
-        require_login();
+
         $rep = new Reporte();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuarioId = isset($_SESSION['user_id']) ? (int)$_SESSION['user_id'] : null;
+
             $data = [
-                'fecha'     => $_POST['fecha'],
-                'usuario'   => (int) $_POST['usuario'],
-                'mascota'   => $_POST['mascota'] ? (int) $_POST['mascota'] : null,
-                'provincia' => $_POST['provincia'],
-                'canton'    => $_POST['canton'],
-                'distrito'  => $_POST['distrito'],
-                'detalles'  => $_POST['detalles'],
+                'fecha'     => !empty($_POST['fecha']) ? $_POST['fecha'] : date('Y-m-d H:i:s'),
+                'usuario'   => $usuarioId,   
+                'mascota'   => null,        
+                'provincia' => trim($_POST['provincia'] ?? ''),
+                'canton'    => trim($_POST['canton'] ?? ''),
+                'distrito'  => trim($_POST['distrito'] ?? ''),
+                'detalles'  => trim($_POST['detalles'] ?? ''),
             ];
 
-            $rep->create($data);
-            header("Location: Reportes.php");
+            if ($rep->create($data)) {
+                $_SESSION['success'] = '¡Reporte enviado correctamente!';
+                if (($_SESSION['rol'] ?? '') === 'admin') {
+                    header('Location: Reportes.php');
+                } else {
+                    header('Location: Reportes.php?action=create');
+                }
+            } else {
+                $_SESSION['error'] = 'Error al guardar el reporte: ' . $rep->getError();
+                header('Location: Reportes.php?action=create');
+            }
             exit();
         }
 
@@ -38,9 +49,13 @@ class ReporteController
 
     public function delete($id)
     {
-        require_login();
+        require_role(['admin']);
         $rep = new Reporte();
-        $rep->delete($id);
+        if ($rep->delete((int)$id)) {
+            $_SESSION['success'] = 'Reporte eliminado';
+        } else {
+            $_SESSION['error'] = 'Error al eliminar: ' . $rep->getError();
+        }
         header("Location: Reportes.php");
         exit();
     }

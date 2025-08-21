@@ -6,13 +6,11 @@ start_session_safe();
 
 $db = Database::connect();
 
-/* Métricas rápidas */
 $totMascotas = (int) $db->query("SELECT COUNT(*) c FROM Mascotas")->fetch_assoc()['c'];
 $totAdopciones = (int) $db->query("SELECT COUNT(*) c FROM Adopciones")->fetch_assoc()['c'];
 $totCampanias = (int) $db->query("SELECT COUNT(*) c FROM Campanias WHERE estado='Activa'")->fetch_assoc()['c'];
 $totVoluntarios = (int) $db->query("SELECT COUNT(*) c FROM Voluntarios WHERE estado='Activo'")->fetch_assoc()['c'];
 
-/* Mascotas disponibles (grid) */
 $mModel = new Mascota();
 $disponibles = $mModel->disponibles(9); 
 
@@ -21,17 +19,15 @@ include 'app/views/partials/header.php';
 
 <div class="home-container">
 
-  <!-- Hero -->
   <div class="jumbotron-fluid text-center text-white py-5 mb-0" style="background-color:#10bc69 !important;">
     <div class="container">
-      <h1 class="display-4 text-white">Bienvenido a DejandoHuellaCR</h1>
+      <h1 class="display-4 text-white">Bienvenido a Patitas Conectadas</h1>
       <p class="lead text-white">Sistema integral de gestión para protectora de animales</p>
       <hr class="my-4 bg-light">
       <p>Plataforma unificada para el manejo de todos los procesos de la organización</p>
     </div>
   </div>
 
-  <!-- Métricas -->
   <div class="bg-light py-4">
     <div class="container">
       <div class="row text-center">
@@ -55,7 +51,6 @@ include 'app/views/partials/header.php';
     </div>
   </div>
 
-  <!-- Módulos -->
   <div class="container py-5">
     <h2 class="text-center mb-4">Módulos Principales</h2>
     <div class="row">

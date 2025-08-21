@@ -25,7 +25,6 @@
             <th class="text-muted">Estado:</th>
             <td>
               <?php
-                // Mapeo de badges por estado
                 $badge = 'badge-secondary';
                 if ($m['estado'] === 'Disponible') {
                   $badge = 'badge-success';
@@ -71,7 +70,6 @@
         </a>
       <?php endif; ?>
 
-      <!-- Acceso al historial médico (visible para todos; edición controlada por roles en historial.php) -->
       <a href="historial.php?mascota_id=<?= (int)$m['id'] ?>" class="btn btn-info mb-2 mr-2">
         <i class="fas fa-notes-medical"></i> Historial médico
       </a>
@@ -84,7 +82,6 @@
         <?php endif; ?>
       <?php endif; ?>
 
-      <!-- Volver: según si es admin/voluntario o público -->
       <a href="<?= $esAdminOVol ? 'mascotas.php' : 'mascotas_public.php' ?>" class="btn btn-secondary mb-2">
         Volver
       </a>

@@ -16,11 +16,9 @@ $rol = $_SESSION['rol'] ?? null;
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Patitas Conectadas</title>
 
-  <!-- CSS de terceros -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-  <!-- Tu CSS, usando BASE_URL para que funcione en subcarpetas -->
   <link rel="stylesheet" href="/ProyectoAmbienteWeb/css/estilos.css?v=2">
 </head>
 <body>
@@ -43,12 +41,18 @@ $rol = $_SESSION['rol'] ?? null;
           <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/usuarios.php">Usuarios</a></li>
           <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/voluntarios.php">Voluntarios</a></li>
           <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/inventario.php">Inventario</a></li>
-          <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/reportes.php">Reportes</a></li>
+
+          <?php if ($rol === 'admin'): ?>
+            <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/Reportes.php">Reportes</a></li>
+          <?php else: ?>
+            <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/Reportes.php?action=create">Reportes</a></li>
+          <?php endif; ?>
+
         <?php else: ?>
           <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/mascotas_public.php">Mascotas</a></li>
           <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/eventos_public.php">Eventos</a></li>
           <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/campanias_public.php">Campañas</a></li>
-          <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/reportes.php">Reportes</a></li>
+          <li class="list-inline-item"><a href="<?= htmlspecialchars(BASE_URL) ?>/Reportes.php?action=create">Reportes</a></li>
         <?php endif; ?>
 
         <?php if(isset($_SESSION['user_id'])): ?>

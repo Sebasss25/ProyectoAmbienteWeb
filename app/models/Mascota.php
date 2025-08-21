@@ -76,7 +76,6 @@ class Mascota extends BaseModel {
   public function updateConResetAdopciones(int $id, array $d): bool {
     $this->db->begin_transaction();
     try {
-      // 1) Bloquear la mascota y leer estado anterior
       $stmt = $this->db->prepare('SELECT estado FROM Mascotas WHERE id=? FOR UPDATE');
       $stmt->bind_param('i', $id);
       $stmt->execute();
@@ -87,7 +86,6 @@ class Mascota extends BaseModel {
 
       $estadoAnterior = $row['estado'];
 
-      // 2) Actualizar mascota
       $stmt = $this->db->prepare('UPDATE Mascotas
         SET nombre=?, raza=?, edad=?, descripcion=?, foto=?, estado=?, usuario=?
         WHERE id=?');
@@ -97,7 +95,6 @@ class Mascota extends BaseModel {
       );
       if (!$stmt->execute()) { throw new Exception($stmt->error); }
 
-      // 3) Si pasó a "Disponible" desde Adoptado o En comunicación => borrar adopciones
       if ($d['estado'] === 'Disponible' && in_array($estadoAnterior, ['Adoptado','En comunicación'], true)) {
         $stmt = $this->db->prepare('DELETE FROM Adopciones WHERE mascota=?');
         $stmt->bind_param('i', $id);

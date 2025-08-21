@@ -15,7 +15,6 @@ class Voluntario extends BaseModel {
     return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
   }
 
-  /** Detalle por ID de voluntario (con datos del usuario) */
   public function getById(int $idVoluntario): ?array {
     $stmt = $this->db->prepare(
       'SELECT v.id AS id_voluntario, v.usuario AS id_usuario,
@@ -31,16 +30,13 @@ class Voluntario extends BaseModel {
     return $row ?: null;
   }
 
-  /** Obtener id de voluntario por id de usuario (si existe uno cualquiera, preferible el activo) */
   public function getByUsuario(int $usuarioId): ?int {
-    // primero activo
     $stmt = $this->db->prepare('SELECT id FROM Voluntarios WHERE usuario = ? AND estado = "Activo" LIMIT 1');
     $stmt->bind_param('i', $usuarioId);
     $stmt->execute();
     $row = $stmt->get_result()->fetch_assoc();
     if ($row) return (int)$row['id'];
 
-    // luego cualquiera
     $stmt = $this->db->prepare('SELECT id FROM Voluntarios WHERE usuario = ? ORDER BY id DESC LIMIT 1');
     $stmt->bind_param('i', $usuarioId);
     $stmt->execute();
@@ -72,9 +68,7 @@ class Voluntario extends BaseModel {
     return $ok;
   }
 
-  /* ====== NUEVO: Activar / Finalizar voluntariado ====== */
 
-  /** ¿Tiene voluntariado ACTIVO este usuario? */
   public function existsActivoByUsuario(int $usuarioId): bool {
     $stmt = $this->db->prepare('SELECT 1 FROM Voluntarios WHERE usuario=? AND estado="Activo" LIMIT 1');
     $stmt->bind_param('i', $usuarioId);
@@ -82,7 +76,6 @@ class Voluntario extends BaseModel {
     return (bool)$stmt->get_result()->fetch_row();
   }
 
-  /** Activar voluntariado para un usuario (crea fila) */
   public function activarParaUsuario(int $usuarioId): bool {
     if ($this->existsActivoByUsuario($usuarioId)) {
       $this->error = 'El usuario ya tiene un voluntariado activo.';
@@ -98,7 +91,6 @@ class Voluntario extends BaseModel {
     return $ok;
   }
 
-  /** Finalizar voluntariado (poner Inactivo y fechaFin = NOW()) */
   public function inactivar(int $idVoluntario): bool {
     $stmt = $this->db->prepare(
       'UPDATE Voluntarios

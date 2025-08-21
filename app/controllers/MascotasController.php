@@ -49,7 +49,7 @@ class MascotasController {
         'descripcion' => $_POST['descripcion'] ?? '',
         'foto' => $_POST['foto'] ?? null,
         'estado' => $_POST['estado'] ?? 'Disponible',
-        'usuario' => (int)($mascota['usuario']) // mantener propietario original
+        'usuario' => (int)($mascota['usuario']) 
       ];
 
       $estadoAnterior = $mascota['estado'];
@@ -94,7 +94,7 @@ class MascotasController {
       header('Location: mascotas.php'); exit();
     }
 
-    $m = $mascota; // alias para la vista
+    $m = $mascota; 
     require __DIR__ . '/../views/mascotas/detalles.php';
   }
 }

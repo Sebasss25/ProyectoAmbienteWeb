@@ -41,7 +41,7 @@ class EventosController
 
   public function edit(int $id)
   {
-    require_role(['admin', 'voluntario']); // Permitir a voluntarios editar
+    require_role(['admin', 'voluntario']); 
     $e = new Evento();
     $evento = $e->find($id);
     if (!$evento) {
@@ -94,7 +94,7 @@ class EventosController
       exit();
     }
 
-    $e = $evento; // alias para la vista
+    $e = $evento; 
     require __DIR__ . '/../views/Eventos/detalles.php';
   }
 
@@ -111,7 +111,6 @@ class EventosController
     $asistenciaModel = new EventoAsistencia();
     $eventoModel = new Evento();
 
-    // Verificar que el evento existe y está activo
     $evento = $eventoModel->find($evento_id);
     if (!$evento || !in_array($evento['estado'], ['Planificado', 'En curso'])) {
       $_SESSION['eventos_error'] = 'No se puede registrar a este evento';

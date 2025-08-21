@@ -5,7 +5,6 @@ CREATE DATABASE IF NOT EXISTS DejandoHuellaDB
 USE DejandoHuellaDB;
 
 CREATE USER IF NOT EXISTS 'patitas'@'localhost' IDENTIFIED BY 'patitas123';
--- Permisos solo sobre tu DB
 GRANT ALL PRIVILEGES ON DejandoHuellaDB.* TO 'patitas'@'localhost';
 FLUSH PRIVILEGES;
 

@@ -39,7 +39,6 @@ class Usuario extends BaseModel {
   }
 
   public function rolesDisponibles(): array {
-    // Filtramos a los 3 roles que mencionaste (orden alfabético)
     $sql = "SELECT id, nombre
             FROM Roles
             WHERE nombre IN ('Administrador','Usuario','Voluntario')
@@ -63,7 +62,6 @@ class Usuario extends BaseModel {
   }
 
   public function update(int $id, array $d): bool {
-    // Aquí NO se actualiza password (no fue solicitado).
     $stmt = $this->db->prepare(
       'UPDATE Usuarios
          SET nombre = ?, apellido = ?, email = ?, telefono = ?, rol = ?

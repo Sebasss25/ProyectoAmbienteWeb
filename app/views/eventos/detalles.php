@@ -31,8 +31,7 @@
           <tr>
             <th class="text-muted">Estado:</th>
             <td>
-              <span
-                class="badge <?= ($e['estado'] == 'En curso') ? 'badge-success' : (($e['estado'] == 'Planificado') ? 'badge-warning' : 'badge-secondary') ?>">
+              <span class="badge <?= ($e['estado'] == 'En curso') ? 'badge-success' : (($e['estado'] == 'Planificado') ? 'badge-warning' : 'badge-secondary') ?>">
                 <?= htmlspecialchars($e['estado']) ?>
               </span>
             </td>
@@ -46,27 +45,44 @@
     </div>
 
     <div class="card-footer bg-white">
-      <?php if (($_SESSION['rol'] ?? 'usuario') === 'admin' || ($_SESSION['rol'] ?? '') === 'voluntario'): ?>
-        <!-- Botones para admin/voluntarios -->
-      <?php else: ?>
-        <?php if (in_array($e['estado'], ['Planificado', 'En curso'])): ?>
-          <?php
-          $asistenciaModel = new EventoAsistencia();
-          $yaAsistio = $asistenciaModel->verificarAsistencia($e['id'], (int) $_SESSION['user_id']);
-          ?>
+      <?php
+        $rol    = $_SESSION['rol']     ?? 'usuario';
+        $userId = $_SESSION['user_id'] ?? null;
+      ?>
 
-          <?php if ($yaAsistio): ?>
-            <button class="btn btn-success" disabled>
-              <i class="fas fa-check-circle"></i> Ya estás registrado
-            </button>
+      <?php if (in_array($rol, ['admin','voluntario'], true)): ?>
+        <a href="eventos.php" class="btn btn-secondary">Volver</a>
+
+      <?php else: ?>
+        <?php if (in_array($e['estado'], ['Planificado', 'En curso'], true)): ?>
+          <?php if ($userId): ?>
+            <?php
+              require_once __DIR__ . '/../../models/EventoAsistencia.php';
+              $asistenciaModel = new EventoAsistencia();
+              $yaAsistio = $asistenciaModel->verificarAsistencia((int)$e['id'], (int)$userId);
+            ?>
+
+            <?php if ($yaAsistio): ?>
+              <button class="btn btn-success" disabled>
+                <i class="fas fa-check-circle"></i> Ya estás registrado
+              </button>
+            <?php else: ?>
+              <button
+                class="btn btn-success"
+                onclick="if(confirm('¿Confirmas tu asistencia a este evento?')) { window.location.href='eventos.php?action=asistir&id=<?= (int)$e['id'] ?>'; }">
+                <i class="fas fa-calendar-check"></i> Asistir
+              </button>
+            <?php endif; ?>
+
           <?php else: ?>
-            <button class="btn btn-success" onclick="if(confirm('¿Confirmas tu asistencia a este evento?')) {
-                            window.location.href='eventos.php?action=asistir&id=<?= $e['id'] ?>';
-                        }">
+            <button
+              class="btn btn-success"
+              onclick="window.location.href='eventos.php?action=asistir&id=<?= (int)$e['id'] ?>'">
               <i class="fas fa-calendar-check"></i> Asistir
             </button>
           <?php endif; ?>
         <?php endif; ?>
+
         <a href="eventos.php" class="btn btn-secondary ml-2">Volver</a>
       <?php endif; ?>
     </div>

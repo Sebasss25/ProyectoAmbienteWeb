@@ -27,7 +27,7 @@ class Campania extends BaseModel
     $stmt->bind_param('i', $id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc(); // Esto retorna un array asociativo 
+    return $result->fetch_assoc(); 
   }
 
   public function create(array $d): bool

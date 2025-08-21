@@ -4,11 +4,6 @@
     <h1>Lista de Eventos</h1>
     
     <form action="#" class="d-flex" role="search">
-      <select class="form-select me-2" name="type">
-        <option value="Sin Filtro">Sin Filtro</option>
-        <option value="Presencial">Presencial</option>
-        <option value="Virtual">Virtual</option>
-      </select>
       <input class="form-control me-2" type="search" name="search" placeholder="Buscar por nombre o descripción">
       <button class="btn btn-secondary ml-2" type="submit">
         <i class="fas fa-search"></i> Buscar

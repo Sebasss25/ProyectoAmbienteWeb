@@ -17,7 +17,6 @@ class CampaniasController
   {
     require_role(['admin']);
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-      // Validar sesión primero
       if (!isset($_SESSION['user_id'])) {
         $_SESSION['campanias_error'] = 'No se pudo identificar al usuario responsable';
         header('Location: campanias.php?action=create');
@@ -121,7 +120,6 @@ class CampaniasController
       $campaniaModel = new Campania();
       $donacionModel = new CampaniaDonacion();
 
-      // Verificar que la campaña existe y está activa
       $campania = $campaniaModel->find($campania_id);
       if (!$campania || $campania['estado'] !== 'Activa') {
         $_SESSION['campanias_error'] = 'No se puede donar a esta campaña';
