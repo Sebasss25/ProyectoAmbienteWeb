@@ -48,7 +48,7 @@
             <i class="fas fa-hand-holding-heart"></i> Donar
           </a>
         <?php endif; ?>
-        <a href="campanias.php" class="btn btn-secondary ml-2">Volver</a>
+        <a href="campanias_public.php" class="btn btn-secondary ml-2">Volver</a>
       <?php endif; ?>
     </div>
   </div>
