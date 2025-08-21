@@ -29,7 +29,6 @@
           <th>Raza</th>
           <th>Edad</th>
           <th>Estado</th>
-          <th>Propietario</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -40,7 +39,6 @@
           <td><?= htmlspecialchars($m['raza']) ?></td>
           <td><?= (int)$m['edad'] ?> años</td>
           <td><span class="badge badge-<?= $m['estado']==='Disponible'?'success':'secondary' ?>"><?= $m['estado'] ?></span></td>
-          <td><?= htmlspecialchars($m['propietario']) ?></td>
           <td>
             <?php if (($_SESSION['rol'] ?? 'usuario') === 'admin'): ?>
               <a href="mascotas.php?action=detalles&id=<?php echo $m['id']; ?>" class="btn btn-info btn-sm"><i class="fas fa-info-circle"></i> Detalles</a>

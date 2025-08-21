@@ -1,7 +1,22 @@
-body { background: #f8fafb; }
-.header { background:#fff; border-bottom:1px solid #eee; }
-.sitename { margin:0; font-size:1.25rem; }
-.navmenu a { padding: .5rem .75rem; display:inline-block; }
+body {
+    background: #f8fafb;
+}
+
+.header {
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.sitename {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.navmenu a {
+    padding: .5rem .75rem;
+    display: inline-block;
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
 }
@@ -27,8 +42,13 @@ body {
     border: none;
 }
 
-.table th { font-weight:600; }
-.badge { font-size: 90%; }
+.table th {
+    font-weight: 600;
+}
+
+.badge {
+    font-size: 90%;
+}
 
 .card:hover {
     transform: translateY(-5px);
@@ -270,3 +290,599 @@ header {
     font-weight: bold;
     margin: 0;
 }
+
+/* ===== Estilos generales del historial médico ===== */
+:root {
+    --hist-accent: #14b8d4;
+    /* cian principal */
+    --hist-accent-2: #0ea5b5;
+    /* cian oscuro */
+    --hist-bg: #f7fafb;
+    /* fondo suave */
+    --hist-text: #1f2937;
+    /* texto gris oscuro */
+    --hist-muted: #6b7280;
+    /* gris medio */
+    --hist-border: #e5e7eb;
+    /* borde suave */
+    --hist-success: #16a34a;
+    --hist-warning: #f59e0b;
+    --hist-info: #3b82f6;
+    --hist-danger: #ef4444;
+}
+
+/* Contenedor general */
+.hist-container {
+    background: var(--hist-bg);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+/* Card */
+.hist-card {
+    border: 1px solid var(--hist-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.04);
+    background: #fff;
+}
+
+/* Header de la card */
+.hist-card .hist-card-header {
+    background: linear-gradient(135deg, var(--hist-accent), var(--hist-accent-2));
+    color: #fff;
+    padding: .9rem 1.2rem;
+    font-weight: 600;
+    letter-spacing: .2px;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+/* Footer de la card */
+.hist-card .hist-card-footer {
+    background: #fff;
+    border-top: 1px solid var(--hist-border);
+    padding: .8rem 1rem;
+}
+
+/* Tabla */
+.hist-table-wrap {
+    overflow: auto;
+    /* scroll horizontal en móviles */
+}
+
+.hist-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .95rem;
+    color: var(--hist-text);
+}
+
+.hist-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #ffffff;
+    border-bottom: 2px solid var(--hist-border);
+    color: var(--hist-muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: .78rem;
+    padding: .9rem .8rem;
+}
+
+.hist-table tbody tr {
+    transition: background-color .18s ease, transform .08s ease;
+}
+
+.hist-table tbody tr:hover {
+    background: #f8fbfc;
+}
+
+.hist-table td {
+    border-bottom: 1px solid var(--hist-border);
+    padding: .8rem .8rem;
+    vertical-align: top;
+    line-height: 1.35;
+}
+
+.hist-table .is-subrow td {
+    background: #fcfdfd;
+    font-size: .92rem;
+    color: #374151;
+    border-top: none;
+}
+
+/* Celdas compactas para textos largos */
+.hist-cell--wrap {
+    white-space: normal;
+    word-break: break-word;
+}
+
+/* Badges “suaves” */
+.badge-success {
+    background-color: rgba(22, 163, 74, .12);
+    color: var(--hist-success);
+}
+
+.badge-warning {
+    background-color: rgba(245, 158, 11, .14);
+    color: var(--hist-warning);
+}
+
+.badge-info {
+    background-color: rgba(56, 189, 248, .18);
+    color: #0369a1;
+}
+
+.badge-dark {
+    background-color: #111827;
+    color: #fff;
+}
+
+.badge-secondary {
+    background-color: rgba(107, 114, 128, .18);
+    color: #374151;
+}
+
+/* Botones personalizados */
+.hist-btn {
+    border-radius: 10px;
+    border: 1px solid var(--hist-border);
+    background: #fff;
+    color: var(--hist-text);
+    padding: .5rem .8rem;
+    transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+.hist-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(2, 132, 199, 0.08);
+    border-color: #cfe9ef;
+}
+
+.hist-btn--primary {
+    background: var(--hist-accent);
+    border-color: var(--hist-accent);
+    color: #fff;
+}
+
+.hist-btn--primary:hover {
+    background: var(--hist-accent-2);
+    border-color: var(--hist-accent-2);
+}
+
+.hist-btn--danger {
+    background: #fff;
+    color: var(--hist-danger);
+    border-color: rgba(239, 68, 68, .25);
+}
+
+.hist-btn--danger:hover {
+    background: rgba(239, 68, 68, .06);
+    border-color: rgba(239, 68, 68, .45);
+}
+
+/* Pills */
+.hist-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .25rem .55rem;
+    border-radius: 999px;
+    background: #f2f7f9;
+    color: #0f172a;
+    border: 1px solid #e6eef1;
+    font-size: .78rem;
+}
+
+/* Estado vacío */
+.hist-empty {
+    border: 1px dashed #cfe3ea;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f9fcfe, #f4f8fb);
+    padding: 1.4rem;
+    color: #0b3a46;
+    text-align: center;
+}
+
+.hist-empty h5 {
+    font-weight: 600;
+    margin-bottom: .4rem;
+}
+
+.hist-empty p {
+    margin: 0;
+    color: #49636c;
+}
+
+/* Formularios */
+.hist-form .form-control,
+.hist-form .custom-select {
+    border-radius: 10px;
+    border-color: var(--hist-border);
+}
+
+.hist-form .form-control:focus,
+.hist-form .custom-select:focus {
+    border-color: #a7e2ec;
+    box-shadow: 0 0 0 .2rem rgba(20, 184, 212, .15);
+}
+
+/* Acciones en filas */
+.hist-row-actions {
+    display: flex;
+    gap: .4rem;
+    flex-wrap: wrap;
+}
+
+/* Imágenes */
+.hist-img {
+    max-width: 320px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--hist-border);
+    background: #f3f5f7;
+}
+
+/* Tipografía */
+.hist-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0b4252;
+}
+
+/* Utilidades */
+.hist-muted {
+    color: var(--hist-muted);
+}
+
+.hist-space-sm {
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.hist-space {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.hist-space-lg {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hist-card .hist-card-header {
+        font-size: .95rem;
+        padding: .75rem .9rem;
+    }
+
+    .hist-table td,
+    .hist-table th {
+        padding: .65rem .6rem;
+    }
+}
+
+/* ===== Estilos para impresión ===== */
+@media print {
+    body {
+        background: #fff;
+    }
+
+    .hist-container {
+        padding: 0;
+        background: #fff;
+    }
+
+    .hist-card {
+        box-shadow: none;
+        border: none;
+    }
+
+    .hist-card .hist-card-header {
+        background: #fff !important;
+        color: #000 !important;
+        border-bottom: 2px solid #000;
+    }
+
+    .hist-btn,
+    .btn {
+        display: none !important;
+    }
+
+    .navbar,
+    .footer,
+    .alert {
+        display: none !important;
+    }
+
+    .hist-table thead th {
+        position: static;
+        background: #fff;
+        color: #000;
+        border-bottom: 2px solid #000;
+    }
+
+    .hist-table td {
+        border-color: #d1d5db;
+    }
+}
+
+/* Botones de acción en tabla */
+.table .btn-warning {
+    background-color: #facc15;
+    border: none;
+    color: #111;
+    border-radius: 8px;
+    padding: .35rem .6rem;
+}
+
+.table .btn-warning:hover {
+    background-color: #eab308;
+}
+
+.table .btn-danger {
+    background-color: #ef4444;
+    border: none;
+    border-radius: 8px;
+    padding: .35rem .6rem;
+}
+
+.table .btn-danger:hover {
+    background-color: #dc2626;
+}
+
+.hist-card-footer .hist-row-actions {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+}
+
+.hist-card-footer .hist-btn {
+    min-width: 120px;
+    text-align: center;
+}
+
+.hist-card-header {
+    font-size: 1.1rem;
+}
+
+.hist-table {
+    margin-bottom: 1rem;
+}
+
+.hist-pill {
+    font-weight: 500;
+}
+
+
+
+/* FIX: altura sin unidad */
+.imagen-mascota {
+    width: 100%;
+    height: 100px;
+    /* antes: 100 */
+    object-fit: cover;
+}
+
+/* ===== Estilos del historial médico ===== */
+:root {
+    --hist-accent: #14b8d4;
+    --hist-accent-2: #0ea5b5;
+    --hist-bg: #f7fafb;
+    --hist-text: #1f2937;
+    --hist-muted: #6b7280;
+    --hist-border: #e5e7eb;
+    --hist-success: #16a34a;
+    --hist-warning: #f59e0b;
+    --hist-info: #3b82f6;
+    --hist-danger: #ef4444;
+}
+
+.hist-container {
+    background: var(--hist-bg);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.hist-card {
+    border: 1px solid var(--hist-border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, .04);
+    background: #fff;
+}
+
+.hist-card .hist-card-header {
+    background: linear-gradient(135deg, var(--hist-accent), var(--hist-accent-2));
+    color: #fff;
+    padding: .9rem 1.2rem;
+    font-weight: 600;
+    letter-spacing: .2px;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+.hist-card .hist-card-footer {
+    background: #fff;
+    border-top: 1px solid var(--hist-border);
+    padding: .8rem 1rem;
+}
+
+.hist-table-wrap {
+    overflow: auto;
+}
+
+.hist-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: .95rem;
+    color: var(--hist-text);
+    margin-bottom: 1rem;
+}
+
+.hist-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #fff;
+    border-bottom: 2px solid var(--hist-border);
+    color: var(--hist-muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-size: .78rem;
+    padding: .9rem .8rem;
+}
+
+.hist-table tbody tr {
+    transition: background-color .18s ease, transform .08s ease;
+}
+
+.hist-table tbody tr:hover {
+    background: #f8fbfc;
+}
+
+.hist-table td {
+    border-bottom: 1px solid var(--hist-border);
+    padding: .8rem .8rem;
+    vertical-align: top;
+    line-height: 1.35;
+}
+
+.hist-table .is-subrow td {
+    background: #fcfdfd;
+    font-size: .92rem;
+    color: #374151;
+    border-top: none;
+}
+
+.hist-cell--wrap {
+    white-space: normal;
+    word-break: break-word;
+}
+
+.badge-success {
+    background-color: rgba(22, 163, 74, .12);
+    color: var(--hist-success);
+}
+
+.badge-warning {
+    background-color: rgba(245, 158, 11, .14);
+    color: var(--hist-warning);
+}
+
+.badge-info {
+    background-color: rgba(56, 189, 248, .18);
+    color: #0369a1;
+}
+
+.badge-dark {
+    background-color: #111827;
+    color: #fff;
+}
+
+.badge-secondary {
+    background-color: rgba(107, 114, 128, .18);
+    color: #374151;
+}
+
+.hist-btn {
+    border-radius: 10px;
+    border: 1px solid var(--hist-border);
+    background: #fff;
+    color: var(--hist-text);
+    padding: .5rem .8rem;
+    transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
+    text-decoration: none;
+    font-size: .9rem;
+}
+
+.hist-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(2, 132, 199, .08);
+    border-color: #cfe9ef;
+}
+
+.hist-btn--primary {
+    background: var(--hist-accent);
+    border-color: var(--hist-accent);
+    color: #fff;
+}
+
+.hist-btn--primary:hover {
+    background: var(--hist-accent-2);
+    border-color: var(--hist-accent-2);
+}
+
+.hist-btn--danger {
+    background: #fff;
+    color: var(--hist-danger);
+    border-color: rgba(239, 68, 68, .25);
+}
+
+.hist-btn--danger:hover {
+    background: rgba(239, 68, 68, .06);
+    border-color: rgba(239, 68, 68, .45);
+}
+
+.hist-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    padding: .25rem .55rem;
+    border-radius: 999px;
+    background: #f2f7f9;
+    color: #0f172a;
+    border: 1px solid #e6eef1;
+    font-size: .78rem;
+}
+
+.hist-row-actions {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+}
+
+@media (max-width:768px) {
+    .hist-card .hist-card-header {
+        font-size: .95rem;
+        padding: .75rem .9rem;
+    }
+
+    .hist-table td,
+    .hist-table th {
+        padding: .65rem .6rem;
+    }
+}
+
+/* Botones de acción (en tabla Bootstrap) */
+.table .btn-warning {
+    background-color: #facc15;
+    border: none;
+    color: #111;
+    border-radius: 8px;
+    padding: .35rem .6rem;
+}
+
+.table .btn-warning:hover {
+    background-color: #eab308;
+}
+
+.table .btn-danger {
+    background-color: #ef4444;
+    border: none;
+    border-radius: 8px;
+    padding: .35rem .6rem;
+}
+
+.table .btn-danger:hover {
+    background-color: #dc2626;
+}   

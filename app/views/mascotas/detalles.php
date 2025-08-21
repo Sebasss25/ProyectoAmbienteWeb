@@ -25,10 +25,17 @@
             <th class="text-muted">Estado:</th>
             <td>
               <?php
+                // Mapeo de badges por estado
                 $badge = 'badge-secondary';
-                if ($m['estado']==='Disponible') $badge='badge-success';
-                elseif ($m['estado']==='En comunicación') $badge='badge-info';
-                elseif ($m['estado']==='En tratamiento') $badge='badge-warning';
+                if ($m['estado'] === 'Disponible') {
+                  $badge = 'badge-success';
+                } elseif ($m['estado'] === 'En comunicación') {
+                  $badge = 'badge-info';
+                } elseif ($m['estado'] === 'En tratamiento') {
+                  $badge = 'badge-warning';
+                } elseif ($m['estado'] === 'Adoptado') {
+                  $badge = 'badge-dark';
+                }
               ?>
               <span class="badge <?= $badge ?>"><?= htmlspecialchars($m['estado']) ?></span>
             </td>
@@ -52,18 +59,35 @@
       </table>
     </div>
 
-    <div class="card-footer bg-white">
-      <?php if (($_SESSION['rol'] ?? 'usuario') === 'admin' || ($_SESSION['rol'] ?? '') === 'voluntario'): ?>
-        <a href="mascotas.php?action=edit&id=<?= (int)$m['id'] ?>" class="btn btn-warning">Editar</a>
-        <a href="mascotas.php" class="btn btn-secondary ml-2">Volver</a>
-      <?php else: ?>
-        <?php if ($m['estado']==='Disponible'): ?>
-          <a href="adopciones.php?action=create&mascota_id=<?= (int)$m['id'] ?>" class="btn btn-success">
+    <div class="card-footer bg-white d-flex flex-wrap gap-2">
+      <?php
+        $rol = $_SESSION['rol'] ?? 'usuario';
+        $esAdminOVol = ($rol === 'admin' || $rol === 'voluntario');
+      ?>
+
+      <?php if ($esAdminOVol): ?>
+        <a href="mascotas.php?action=edit&id=<?= (int)$m['id'] ?>" class="btn btn-warning mb-2 mr-2">
+          <i class="fas fa-edit"></i> Editar
+        </a>
+      <?php endif; ?>
+
+      <!-- Acceso al historial médico (visible para todos; edición controlada por roles en historial.php) -->
+      <a href="historial.php?mascota_id=<?= (int)$m['id'] ?>" class="btn btn-info mb-2 mr-2">
+        <i class="fas fa-notes-medical"></i> Historial médico
+      </a>
+
+      <?php if (!$esAdminOVol): ?>
+        <?php if ($m['estado'] === 'Disponible'): ?>
+          <a href="adopciones.php?action=create&mascota_id=<?= (int)$m['id'] ?>" class="btn btn-success mb-2 mr-2">
             <i class="fas fa-heart"></i> Adoptar
           </a>
         <?php endif; ?>
-        <a href="mascotas_public.php" class="btn btn-secondary ml-2">Volver</a>
       <?php endif; ?>
+
+      <!-- Volver: según si es admin/voluntario o público -->
+      <a href="<?= $esAdminOVol ? 'mascotas.php' : 'mascotas_public.php' ?>" class="btn btn-secondary mb-2">
+        Volver
+      </a>
     </div>
   </div>
 

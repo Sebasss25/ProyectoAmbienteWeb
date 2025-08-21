@@ -26,6 +26,15 @@ class Mascota extends BaseModel {
     $row = $stmt->get_result()->fetch_assoc();
     return $row ?: null;
   }
+    public function setEstado(int $id, string $estado): bool {
+    $stmt = $this->db->prepare('UPDATE Mascotas SET estado=? WHERE id=?');
+    $stmt->bind_param('si', $estado, $id);
+    $ok = $stmt->execute();
+    if(!$ok){ $this->error = $stmt->error; }
+    return $ok;
+  }
+
+
 
   public function create(array $d): bool {
     $stmt = $this->db->prepare('INSERT INTO Mascotas(nombre,raza,edad,descripcion,foto,estado,usuario) VALUES (?,?,?,?,?,?,?)');
