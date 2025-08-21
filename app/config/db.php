@@ -3,10 +3,10 @@ class Database {
     public static function connect(): mysqli {
         $host = 'localhost';
         $user = 'root';       // <--
-        $pass = '';    // <--
+        $pass = '1234';    // <--
 
         $db   = 'dejandohuelladb';
-        $port = 3306;            // según el Workbench
+        //$port = 3306;            // según el Workbench
 
         $mysqli = new mysqli($host, $user, $pass, $db);
         if ($mysqli->connect_errno) {
