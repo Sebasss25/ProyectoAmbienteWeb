@@ -18,10 +18,7 @@ class Usuario extends BaseModel {
   }
   public function findByEmail(string $email): ?array {
     $stmt = $this->db->prepare(
-      'SELECT u.*, r.nombre AS rol_nombre
-       FROM Usuarios u
-       JOIN Roles r ON u.rol = r.id
-       WHERE u.email = ? LIMIT 1'
+      'SELECT * FROM voluntarios WHERE estado LIKE :estado'
     );
     $stmt->bind_param('s', $email);
     $stmt->execute();

@@ -12,33 +12,21 @@ class VoluntariosController
     require 'app/views/Voluntarios/index.php';
   }
 
-//   public function edit(int $id)
-//   {
-//     require_role(['admin', 'voluntario']); // Permitir a voluntarios editar
-//     $u = new Usuario();
-//     $usuario = $u->find($id);
-//     if (!$usuario) {
-//       header('Location: eventos.php');
-//       exit();
-//     }
+  public function search(string $estado)
+  {
+    require_login();
+    $v = new Voluntario();
+    $voluntarios = $v->search($estado);
 
-//     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//       $data = [
-//         'nombre' => $_POST['nombre'] ?? '',
-//         'apellido' => $_POST['apellido'] ?? '',
-//         'email' => $_POST['email'] ?? '',
-//         'telefono' => $_POST['telefono'] ?? ''
-//       ];
-//       if ($u->update($id, $data)) {
-//         $_SESSION['success'] = 'Evento actualizado';
-//       } else {
-//         $_SESSION['error'] = 'Error: ' . $u->getError();
-//       }
-//       header('Location: usuarios.php');
-//       exit();
-//     }
-//     require 'app/views/Usuarios/edit.php';
-//   }
+    if ($voluntarios && count($voluntarios) > 0) {
+        $_SESSION['voluntarios_success'] = 'Voluntarios encontrados';
+    } else {
+        $voluntarios = [];
+        $_SESSION['error'] = 'No se encontraron voluntarios con ese estado';
+    }
+
+    require 'app/views/Voluntarios/index.php';
+  }
 
   public function delete(int $id)
   {

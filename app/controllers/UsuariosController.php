@@ -52,4 +52,21 @@ class UsuariosController
     header('Location: usuarios.php');
     exit();
   }
+
+public function search(string $email)
+  {
+    require_role(['admin']);
+    $u = new Usuario();
+    $usuario = $u->findByEmail($email);
+
+    if ($usuario) {
+        $usuarios = [$usuario];
+        $_SESSION['success'] = 'Usuario encontrado';
+    } else {
+        $usuarios = [];
+        $_SESSION['error'] = 'No se encontró un usuario con ese correo';
+    }
+
+    require 'app/views/Usuarios/index.php';
+  }
 }

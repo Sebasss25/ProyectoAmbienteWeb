@@ -20,6 +20,21 @@ class Voluntario extends BaseModel {
     return $row ?: null;
   }
 
+  public function search(string $estado): array {
+    $stmt = $this->db->prepare(
+      'SELECT v.id AS id_voluntario,
+              u.nombre, u.apellido, u.email,
+              v.fechaInicio, v.fechaFin, v.horas, v.estado
+       FROM Voluntarios v
+       JOIN Usuarios u ON u.id = v.usuario
+       WHERE v.estado LIKE ?'
+    );
+    $like = "%$estado%";
+    $stmt->bind_param('s', $like);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    return $res ? $res->fetch_all(MYSQLI_ASSOC) : [];
+}
 
     public function delete(int $id): bool {
     $stmt = $this->db->prepare('DELETE FROM Voluntarios WHERE id=?');

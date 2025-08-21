@@ -3,21 +3,13 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Lista de Usuarios</h1>
     
-    <form action="#" class="d-flex" role="search">
-      <select class="form-select me-2" name="type">
-        <option value="Sin Filtro">Sin Filtro</option>
-        <option value="Presencial">Presencial</option>
-        <option value="Virtual">Virtual</option>
-      </select>
-      <input class="form-control me-2" type="search" name="search" placeholder="Buscar por nombre o descripción">
+    <form action="usuarios.php" method="get" class="d-flex" role="search">
+        <input type="hidden" name="action" value="search">
+        <input class="form-control me-2" type="search" name="email" placeholder="Buscar por correo">
       <button class="btn btn-secondary ml-2" type="submit">
-        <i class="fas fa-search"></i> Buscar
+      <i class="fas fa-search"></i> Buscar
       </button>
     </form>
-    
-    <?php if (($_SESSION['rol'] ?? 'usuario') === 'admin'): ?>
-      <a href="eventos.php?action=create" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Evento</a>
-    <?php endif; ?>
   </div>
 
   <?php if (!empty($_SESSION['usuarios_success'])): ?>

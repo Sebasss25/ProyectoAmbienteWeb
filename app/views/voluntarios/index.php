@@ -3,22 +3,14 @@
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>Lista de Voluntarios</h1>
     
-    <form action="#" class="d-flex" role="search">
-      <select class="form-select me-2" name="type">
-        <option value="Sin Filtro">Sin Filtro</option>
-        <option value="Presencial">Presencial</option>
-        <option value="Virtual">Virtual</option>
-      </select>
-      <input class="form-control me-2" type="search" name="search" placeholder="Buscar por nombre o descripción">
-      <button class="btn btn-secondary ml-2" type="submit">
-        <i class="fas fa-search"></i> Buscar
-      </button>
-    </form>
-    
-    <?php if (($_SESSION['rol'] ?? 'usuario') === 'admin'): ?>
-      <a href="voluntarios.php?action=create" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Evento</a>
-    <?php endif; ?>
-  </div>
+    <form action="voluntarios.php" method="get" class="d-flex mb-3" role="search">
+  <input type="hidden" name="action" value="search">
+  <input class="form-control me-2" type="search" name="estado" placeholder="Buscar por estado">
+  <button class="btn btn-secondary ml-2" type="submit">
+    <i class="fas fa-search"></i> Buscar
+  </button>
+</form>
+</div>
 
   <?php if (!empty($_SESSION['voluntarios_success'])): ?>
     <div class="alert alert-success"><?= $_SESSION['voluntarios_success']; unset($_SESSION['voluntarios_success']); ?></div>
@@ -49,7 +41,7 @@
               <!-- <a href="voluntarios.php?action=edit&id=<?= $v['id'] ?>" class="btn btn-warning btn-sm">
                 <i class="fas fa-edit"></i> Editar
               </a> -->
-              <a href="voluntarios.php?action=delete&id=<?= $v['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar voluntario?')">
+              <a href="voluntarios.php?action=delete&id=<?= $v['id_voluntario'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('¿Eliminar voluntario?')">
                 <i class="fas fa-trash"></i> Eliminar
               </a>
             <?php endif; ?>
